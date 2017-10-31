@@ -1,0 +1,170 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="cvn-navbar-styles.html">
+<dom-module id="cvn-navbar">
+  <template>
+    <style include="cvn-navbar-styles">
+      :host {
+        display: block;
+      }
+
+      #cvnNavbar {
+        box-sizing: border-box;
+        border: 1px solid black;
+        height: 60px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      #cvnNavbar .cvn-navbar-items {
+        height: 100%;
+          justify-content: space-around;
+        align-items: center;
+      }
+
+      .cvn-navbar-collapse-menu-outer {
+        height: 100%;
+        display: none;
+        justify-content: flex-end;
+        align-items: center;
+      }
+
+      .cvn-navbar-collapse-menu {
+        margin-right: 20px;
+      }
+
+      .cvn-navbar-collapse-menu > div {
+        display: block;
+        border-radius: 8px;
+        background-color: #fff;
+        width: 20px;
+        padding: 2px;
+        margin-bottom: 4px;
+      }
+
+      .cvn-navbar-collapse-menu:hover > div {
+        background-color: #635394;
+      }
+
+      .cvn-navbar-collapse-menu > div:last-child {
+        margin-bottom: 0;
+      }
+      .cvn-navbar-item {
+        display: block;
+      }
+
+      .cvn-navbar-item a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .cvn-navbar-item a:hover {
+        color: #635394;
+      }
+
+      .cvn-navbar-item a.active {
+        color: #8D81B3;
+      }
+
+      @media only screen and (max-width: 768px) {
+        .cvn-navbar-items {
+          display: none;
+        }
+
+        .cvn-navbar-collapse-menu-outer {
+          display: flex;
+        }
+      }
+
+      @media only screen and (min-width: 769px) {
+        .cvn-navbar-items {
+          display: flex;
+        }
+
+        .cvn-navbar-collapse-menu-outer {
+          display: none;
+        }
+      }
+    </style>
+    <nav id="cvnNavbar" class="bgcolor-primary-0 font-family cvn-navbar">
+      <div class="cvn-navbar-items">
+        <div class="cvn-navbar-item"><a href="#" class="active">Hvidevare</a></div>
+        <div class="cvn-navbar-item"><a href="#">Hus & fritid</a></div>
+        <div class="cvn-navbar-item"><a href="#">Køkkenudstyr</a></div>
+        <div class="cvn-navbar-item"><a href="#">Velvære</a></div>
+        <div class="cvn-navbar-item"><a href="#">Fitness</a></div>
+        <div class="cvn-navbar-item"><a href="#">Foto</a></div>
+        <div class="cvn-navbar-item"><a href="#">Tv</a></div>
+        <div class="cvn-navbar-item"><a href="#">Lyd</a></div>
+        <div class="cvn-navbar-item"><a href="#">Computer</a></div>
+        <div class="cvn-navbar-item"><a href="#">Tablets</a></div>
+        <div class="cvn-navbar-item"><a href="#">Mobil</a></div>
+        <div class="cvn-navbar-item"><a href="#">Spil</a></div>
+        <div class="cvn-navbar-item"><a href="#">Køkken</a></div>
+      </div>
+      <div class="cvn-navbar-collapse-menu-outer">
+          <div id="cvnNavbarCollapseMenu" class="cvn-navbar-collapse-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+      </div>
+
+    </nav>
+  </template>
+
+  <script>
+    class CvnNavbar extends Polymer.Element {
+      static get is() { return "cvn-navbar"; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'web-components-navbar'
+          }
+        };
+      }
+
+      ready() {
+          super.ready();
+
+          //console.log("navbar collapse", this._collapseNavbar());
+
+          //this._showHideCollapse(this._collapseNavbar());
+        }
+
+        // _collapseNavbar() {
+        //   let navbarCollapse = false;
+        //   let items = this.$.cvnNavbar;
+        //   let itemsChildren = items.querySelectorAll(".cvn-navbar-item");
+        //   let itemsWidth = 0;
+        //   for (let i = 0; i < itemsChildren.length; i++) {
+        //     let item = itemsChildren[i];
+        //     itemsWidth += item.clientWidth;
+        //   }
+          
+        //   itemsWidth += (itemsChildren.length * 10);
+        //   if (itemsWidth >= items.clientWidth) {
+        //     navbarCollapse = true;
+        //   }
+
+        //   return navbarCollapse;
+        // }
+
+        // _showHideCollapse(collapse) {
+        //     let menu = this.$.cvnNavbar.querySelector(".cvn-navbar-collapse-menu-outer");
+        //     let items = this.$.cvnNavbar.querySelector(".cvn-navbar-items");
+            
+        //     if (collapse) {
+        //       items.style.display = "none";
+        //       menu.style.display = "flex";
+        //     } else {
+        //       menu.style.display = "none";
+        //       items.style.display = "flex";
+        //     }
+        // }
+    }
+    window.customElements.define(CvnNavbar.is, CvnNavbar);
+  </script>
+</dom-module>
