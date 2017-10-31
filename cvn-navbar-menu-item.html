@@ -1,0 +1,53 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="cvn-navbar-styles.html">
+<dom-module id="cvn-navbar-menu-item">
+    <template>
+        <style include="cvn-navbar-styles">
+            :host {
+                display: block;
+            }
+
+            .cvn-navbar-item {
+                box-sizing: border-box;
+                display: block;
+                padding: 10px;
+            }
+
+            .cvn-navbar-item a {
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .cvn-navbar-item a:hover {
+                color: #635394;
+            }
+
+            .cvn-navbar-item a.active {
+                color: #8D81B3;
+            }
+        </style>
+
+        <div class="cvn-navbar-item">
+            <a href="#"><slot></slot></a>
+        </div>
+    </template>
+
+    <script>
+        class CvnNavbarMenuItem extends Polymer.Element {
+            static get is() { return "cvn-navbar-menu-item"; }
+            static get properties() {
+                return {
+                    prop1: {
+                        type: String,
+                        value: 'web-components-navbar'
+                    }
+                };
+            }
+
+            ready() {
+                super.ready();
+            }
+        }
+        window.customElements.define(CvnNavbarMenuItem.is, CvnNavbarMenuItem);
+    </script>
+</dom-module>

@@ -11,6 +11,8 @@
   <!-- <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html"> -->
   <link rel="import" href="../cvn-navbar.html">
+  <link rel="import" href="../cvn-navbar-menu-item.html">
+  <link rel="import" href="../cvn-navbar-dropdown-item.html">
     <style>
       * {
         margin: 0;
@@ -24,7 +26,26 @@
 </head>
 
 <body>
-  <cvn-navbar></cvn-navbar>
+    <!-- <div class="cvn-navbar-item"><a href="#" class="active">Hvidevare</a></div>
+    <div class="cvn-navbar-item"><a href="#">Hus & fritid</a></div>
+    <div class="cvn-navbar-item"><a href="#">Køkkenudstyr</a></div>
+    <div class="cvn-navbar-item"><a href="#">Velvære</a></div>
+    <div class="cvn-navbar-item"><a href="#">Fitness</a></div>
+    <div class="cvn-navbar-item"><a href="#">Foto</a></div>
+    <div class="cvn-navbar-item"><a href="#">Tv</a></div>
+    <div class="cvn-navbar-item"><a href="#">Lyd</a></div>
+    <div class="cvn-navbar-item"><a href="#">Computer</a></div>
+    <div class="cvn-navbar-item"><a href="#">Tablets</a></div>
+    <div class="cvn-navbar-item"><a href="#">Mobil</a></div>
+    <div class="cvn-navbar-item"><a href="#">Spil</a></div>
+    <div class="cvn-navbar-item"><a href="#">Køkken</a></div> -->
+
+  <cvn-navbar>
+    <cvn-navbar-menu-item>Hvidevare</cvn-navbar-menu-item>
+    <cvn-navbar-menu-item>Køkkenudstyr</cvn-navbar-menu-item>
+    <cvn-navbar-dropdown-item>Velvære</cvn-navbar-dropdown-item>
+    <cvn-navbar-dropdown-item>Fitness</cvn-navbar-dropdown-item>
+  </cvn-navbar>
   <div>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quasi, quaerat laboriosam, natus dolorem quae eveniet quo a qui sit eum ea assumenda perspiciatis ullam necessitatibus eaque consectetur fugit reprehenderit!
     Vero nesciunt assumenda ipsum quibusdam voluptas ducimus dolorum, autem corporis, neque iste qui! Similique quidem aperiam eligendi, sequi inventore ea corrupti repudiandae deleniti accusantium non commodi eveniet molestiae fuga ex.

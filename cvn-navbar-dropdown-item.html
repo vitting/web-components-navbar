@@ -1,0 +1,71 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="cvn-navbar-styles.html">
+<dom-module id="cvn-navbar-dropdown-item">
+    <template>
+        <style include="cvn-navbar-styles">
+            :host {
+                display: block;
+            }
+
+            i {
+                border: solid white;
+                border-width: 0 2px 2px 0;
+                display: inline-block;
+                padding: 3px;
+            }
+
+            .arrow {
+                margin-left: 8px;
+                margin-bottom: 2px;
+            }
+
+            .down {
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+            }
+
+            .cvn-navbar-item {
+                box-sizing: border-box;
+                display: block;
+                padding: 10px;
+            }
+
+            .cvn-navbar-item a {
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .cvn-navbar-item a:hover {
+                color: #635394;
+            }
+
+            .cvn-navbar-item a.active {
+                color: #8D81B3;
+            }
+        </style>
+
+        <div class="cvn-navbar-item">
+            <a href="#"><slot></slot><i class="arrow down"></i></a>
+        </div>
+    </template>
+
+    <script>
+        class CvnNavbarDropdownItem extends Polymer.Element {
+            static get is() { return "cvn-navbar-dropdown-item"; }
+            static get properties() {
+                return {
+                    prop1: {
+                        type: String,
+                        value: 'web-components-navbar'
+                    }
+                };
+            }
+
+            ready() {
+                super.ready();
+            }
+        }
+
+        window.customElements.define(CvnNavbarDropdownItem.is, CvnNavbarDropdownItem);
+    </script>
+</dom-module>

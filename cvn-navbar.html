@@ -19,7 +19,7 @@
 
       #cvnNavbar .cvn-navbar-items {
         height: 100%;
-          justify-content: space-around;
+          justify-content: flex-start;
         align-items: center;
       }
 
@@ -89,19 +89,7 @@
     </style>
     <nav id="cvnNavbar" class="bgcolor-primary-0 font-family cvn-navbar">
       <div class="cvn-navbar-items">
-        <div class="cvn-navbar-item"><a href="#" class="active">Hvidevare</a></div>
-        <div class="cvn-navbar-item"><a href="#">Hus & fritid</a></div>
-        <div class="cvn-navbar-item"><a href="#">Køkkenudstyr</a></div>
-        <div class="cvn-navbar-item"><a href="#">Velvære</a></div>
-        <div class="cvn-navbar-item"><a href="#">Fitness</a></div>
-        <div class="cvn-navbar-item"><a href="#">Foto</a></div>
-        <div class="cvn-navbar-item"><a href="#">Tv</a></div>
-        <div class="cvn-navbar-item"><a href="#">Lyd</a></div>
-        <div class="cvn-navbar-item"><a href="#">Computer</a></div>
-        <div class="cvn-navbar-item"><a href="#">Tablets</a></div>
-        <div class="cvn-navbar-item"><a href="#">Mobil</a></div>
-        <div class="cvn-navbar-item"><a href="#">Spil</a></div>
-        <div class="cvn-navbar-item"><a href="#">Køkken</a></div>
+        <slot></slot>
       </div>
       <div class="cvn-navbar-collapse-menu-outer">
           <div id="cvnNavbarCollapseMenu" class="cvn-navbar-collapse-menu">
