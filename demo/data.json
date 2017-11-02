@@ -1,0 +1,71 @@
+[
+    {
+        "type": "single",
+        "name": "Køkkenudstyr",
+        "link": "/products/koekkenudstyr"
+    },
+    {
+        "type": "single",
+        "name": "Hvidevare",
+        "link": "/products/hvidevare"
+    },
+    {
+        "type": "single",
+        "name": "Velvære",
+        "link": "/products/velvaere"
+    },
+    {
+        "type": "dropdown",
+        "name": "Fitness",
+        "link": "/products/fitness",
+        "sub": [
+            {
+                "type": "single",
+                "name": "Sportsure og pulsbælter",
+                "link": "/products/fitness/sportsureogpulsbaelter"
+            },
+            {
+                "type": "single",
+                "name": "Aktivitetstrackere",
+                "link": "/products/fitness/aktivitetstrackere"
+            },
+            {
+                "type": "single",
+                "name": "Outdoor og Golf",
+                "link": "/products/fitness/outdooroggolf"
+            },
+            {
+                "type": "single",
+                "name": "Cykler og cykeludstyr",
+                "link": "/products/fitness/cyklerogcykeludstyr"
+            }
+        ]
+    },
+    {
+        "type": "dropdown",
+        "name": "Computer",
+        "link": "/products/computer",
+        "sub": [
+            {
+                "type": "single",
+                "name": "Eksterne harddiske",
+                "link": "/products/computer/eksterneharddiske"
+            },
+            {
+                "type": "single",
+                "name": "Interne harddiske",
+                "link": "/products/computer/interneharddiske"
+            },
+            {
+                "type": "single",
+                "name": "USB nøgler",
+                "link": "/products/computer/usbnoegler"
+            },
+            {
+                "type": "single",
+                "name": "Hukommelseskort og kortlæsere",
+                "link": "/products/computer/hukommelseskortogkortlaesere"
+            }
+        ]
+    }
+]

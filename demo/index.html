@@ -40,11 +40,7 @@
     <div class="cvn-navbar-item"><a href="#">Spil</a></div>
     <div class="cvn-navbar-item"><a href="#">Køkken</a></div> -->
 
-  <cvn-navbar>
-    <cvn-navbar-menu-item>Hvidevare</cvn-navbar-menu-item>
-    <cvn-navbar-menu-item>Køkkenudstyr</cvn-navbar-menu-item>
-    <cvn-navbar-dropdown-item>Velvære</cvn-navbar-dropdown-item>
-    <cvn-navbar-dropdown-item>Fitness</cvn-navbar-dropdown-item>
+  <cvn-navbar id="navbar" data="">
   </cvn-navbar>
   <div>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quasi, quaerat laboriosam, natus dolorem quae eveniet quo a qui sit eum ea assumenda perspiciatis ullam necessitatibus eaque consectetur fugit reprehenderit!
@@ -89,5 +85,20 @@
     Reiciendis velit et exercitationem corrupti corporis nemo aspernatur quos praesentium, dolorem itaque inventore vitae mollitia. Rerum quod ducimus saepe eaque doloremque numquam minus repellendus hic nisi, veritatis amet, autem expedita?
   </div>
 </body>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch("data.json").then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      let navbar = document.querySelector("#navbar");
+      navbar.setAttribute("data", JSON.stringify(result));
+      
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  });
+</script>
 
 </html>

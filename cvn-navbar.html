@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="cvn-navbar-styles.html">
 <dom-module id="cvn-navbar">
   <template>
@@ -89,7 +90,7 @@
     </style>
     <nav id="cvnNavbar" class="bgcolor-primary-0 font-family cvn-navbar">
       <div class="cvn-navbar-items">
-        <slot></slot>
+       
       </div>
       <div class="cvn-navbar-collapse-menu-outer">
           <div id="cvnNavbarCollapseMenu" class="cvn-navbar-collapse-menu">
@@ -107,52 +108,28 @@
       static get is() { return "cvn-navbar"; }
       static get properties() {
         return {
-          prop1: {
+          data: {
             type: String,
-            value: 'web-components-navbar'
+            value: function() {
+              return {};
+            },
+            observer: "_generateMenu"
           }
         };
       }
 
       ready() {
           super.ready();
+      }
 
-          //console.log("navbar collapse", this._collapseNavbar());
-
-          //this._showHideCollapse(this._collapseNavbar());
+      _generateMenu(newValue, oldValue) {
+        if(newValue) {
+          console.dir(JSON.parse(newValue));
         }
-
-        // _collapseNavbar() {
-        //   let navbarCollapse = false;
-        //   let items = this.$.cvnNavbar;
-        //   let itemsChildren = items.querySelectorAll(".cvn-navbar-item");
-        //   let itemsWidth = 0;
-        //   for (let i = 0; i < itemsChildren.length; i++) {
-        //     let item = itemsChildren[i];
-        //     itemsWidth += item.clientWidth;
-        //   }
-          
-        //   itemsWidth += (itemsChildren.length * 10);
-        //   if (itemsWidth >= items.clientWidth) {
-        //     navbarCollapse = true;
-        //   }
-
-        //   return navbarCollapse;
-        // }
-
-        // _showHideCollapse(collapse) {
-        //     let menu = this.$.cvnNavbar.querySelector(".cvn-navbar-collapse-menu-outer");
-        //     let items = this.$.cvnNavbar.querySelector(".cvn-navbar-items");
-            
-        //     if (collapse) {
-        //       items.style.display = "none";
-        //       menu.style.display = "flex";
-        //     } else {
-        //       menu.style.display = "none";
-        //       items.style.display = "flex";
-        //     }
-        // }
+        
+      }
     }
+
     window.customElements.define(CvnNavbar.is, CvnNavbar);
   </script>
 </dom-module>
