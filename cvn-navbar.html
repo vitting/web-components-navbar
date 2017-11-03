@@ -58,7 +58,19 @@
       
       @media only screen and (max-width: 768px) {
         #cvnNavbar .cvn-navbar-items {
+          /* display: none; */
           display: none;
+          flex-direction: column;
+          background-color: var(--navbar-menu-items-bgcolor);
+          position: absolute;
+          right: 0;
+          top: 60px;
+          height: auto;
+          padding: 20px;
+        }
+
+        #cvnNavbar .cvn-navbar-items-display {
+          display: inline-flex;
         }
 
         #cvnNavbar .cvn-navbar-collapse-menu-outer {
@@ -75,6 +87,7 @@
           display: none;
         }
       }
+
     </style>
     <nav id="cvnNavbar" class="cvn-navbar">
       <div id="cvnNavbarItems" class="cvn-navbar-items"></div>
@@ -110,6 +123,10 @@
 
       ready() {
           super.ready();
+
+          this.$.cvnNavbarCollapseMenu.addEventListener("click", () => {
+            this.$.cvnNavbarItems.classList.toggle("cvn-navbar-items-display");
+          });
       }
 
       _dataObserver(newValue, oldValue) {
@@ -141,6 +158,9 @@
 
         menuItem.innerText = item.name;
         menuItem.setAttribute("link", item.link);
+        menuItem.addEventListener("menu-item-click", (e) => {
+          this.dispatchEvent(new CustomEvent("navbar-menu-item-click", {detail: e.detail}));
+        });
         return menuItem;
       }
     }

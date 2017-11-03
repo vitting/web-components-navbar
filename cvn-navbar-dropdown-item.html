@@ -4,7 +4,7 @@
     <template>
         <style include="cvn-navbar-styles">
             :host {
-                display: inline-block;
+                display: block;
                 height: 100%;
                 align-self: center;
             }
@@ -78,10 +78,16 @@
             .cvn-navbar-item .cvn-navbar-dropdown-items a:hover {
                 color: var(--navbar-dropdown-hover-color);
             }
+
+            @media only screen and (max-width: 768px) {
+                :host {
+                    align-self: flex-start;
+                }
+            }
         </style>
 
-        <div class="cvn-navbar-item">
-            <a href$="[[link]]"><slot></slot><i class="arrow down"></i></a>
+        <div id="cvnNavbarItem" class="cvn-navbar-item">
+            <a class="cvn-navbar-item-link" href$="[[link]]"><slot></slot><i class="arrow down"></i></a>
             <div id="cvnNavbarDropdownItems" class="cvn-navbar-dropdown-items"></div>
         </div>
     </template>
@@ -107,6 +113,17 @@
 
             ready() {
                 super.ready();
+
+                this._initEvents();
+            }
+
+            _initEvents() {
+                let aElem = this.$.cvnNavbarItem.querySelector(".cvn-navbar-item-link");
+                aElem.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.dispatchEvent(new CustomEvent("menu-item-click", {detail: {link: this.link}}));
+                })
             }
 
             _dataObserver(newValue, oldValue) {
