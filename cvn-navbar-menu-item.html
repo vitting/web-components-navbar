@@ -1,34 +1,40 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="cvn-navbar-styles.html">
+
 <dom-module id="cvn-navbar-menu-item">
     <template>
         <style include="cvn-navbar-styles">
             :host {
-                display: block;
+                display: inline-block;
+                height: 100%;
+                align-self: center;
             }
 
             .cvn-navbar-item {
                 box-sizing: border-box;
-                display: block;
+                display: flex;
                 padding: 10px;
+                height: 100%;
+                align-items: center;
+                width: var(--navbar-menu-item-width);
             }
 
             .cvn-navbar-item a {
                 text-decoration: none;
-                color: #fff;
+                color: var(--navbar-menu-item-color);
             }
 
             .cvn-navbar-item a:hover {
-                color: #635394;
+                color: var(--navbar-menu-item-hover-color);
             }
 
             .cvn-navbar-item a.active {
-                color: #8D81B3;
+                color: var(--navbar-menu-item-active-color);
             }
         </style>
 
         <div class="cvn-navbar-item">
-            <a href="#"><slot></slot></a>
+            <a href$="[[link]]"><slot></slot></a>
         </div>
     </template>
 
@@ -37,9 +43,9 @@
             static get is() { return "cvn-navbar-menu-item"; }
             static get properties() {
                 return {
-                    prop1: {
+                    link: {
                         type: String,
-                        value: 'web-components-navbar'
+                        value: ""
                     }
                 };
             }
@@ -48,6 +54,7 @@
                 super.ready();
             }
         }
+
         window.customElements.define(CvnNavbarMenuItem.is, CvnNavbarMenuItem);
     </script>
 </dom-module>

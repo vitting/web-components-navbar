@@ -1,97 +1,83 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="cvn-navbar-menu-item.html">
+<link rel="import" href="cvn-navbar-dropdown-item.html">
 <link rel="import" href="cvn-navbar-styles.html">
+
 <dom-module id="cvn-navbar">
   <template>
     <style include="cvn-navbar-styles">
       :host {
         display: block;
+        font-family: var(--navbar-font-family);
       }
 
       #cvnNavbar {
         box-sizing: border-box;
-        border: 1px solid black;
-        height: 60px;
+        background-color: var(--navbar-bgcolor);
+        height: var(--navbar-height);
         width: 100%;
-        position: fixed;
+        position: var(--navbar-position);
         top: 0;
         left: 0;
       }
 
       #cvnNavbar .cvn-navbar-items {
         height: 100%;
-          justify-content: flex-start;
+        justify-content: var(--navbar-justify-content);
         align-items: center;
       }
 
-      .cvn-navbar-collapse-menu-outer {
+      #cvnNavbar .cvn-navbar-collapse-menu-outer {
         height: 100%;
         display: none;
         justify-content: flex-end;
         align-items: center;
       }
 
-      .cvn-navbar-collapse-menu {
+      #cvnNavbar .cvn-navbar-collapse-menu {
         margin-right: 20px;
+        cursor: pointer;
       }
 
-      .cvn-navbar-collapse-menu > div {
+      #cvnNavbar .cvn-navbar-collapse-menu > div {
         display: block;
         border-radius: 8px;
-        background-color: #fff;
+        background-color: var(--navbar-collapse-menu-color);
         width: 20px;
         padding: 2px;
         margin-bottom: 4px;
       }
 
-      .cvn-navbar-collapse-menu:hover > div {
+      #cvnNavbar .cvn-navbar-collapse-menu:hover > div {
         background-color: #635394;
       }
 
-      .cvn-navbar-collapse-menu > div:last-child {
+      #cvnNavbar .cvn-navbar-collapse-menu > div:last-child {
         margin-bottom: 0;
       }
-      .cvn-navbar-item {
-        display: block;
-      }
-
-      .cvn-navbar-item a {
-        text-decoration: none;
-        color: #fff;
-      }
-
-      .cvn-navbar-item a:hover {
-        color: #635394;
-      }
-
-      .cvn-navbar-item a.active {
-        color: #8D81B3;
-      }
-
+      
       @media only screen and (max-width: 768px) {
-        .cvn-navbar-items {
+        #cvnNavbar .cvn-navbar-items {
           display: none;
         }
 
-        .cvn-navbar-collapse-menu-outer {
+        #cvnNavbar .cvn-navbar-collapse-menu-outer {
           display: flex;
         }
       }
 
       @media only screen and (min-width: 769px) {
-        .cvn-navbar-items {
+        #cvnNavbar .cvn-navbar-items {
           display: flex;
         }
 
-        .cvn-navbar-collapse-menu-outer {
+        #cvnNavbar .cvn-navbar-collapse-menu-outer {
           display: none;
         }
       }
     </style>
-    <nav id="cvnNavbar" class="bgcolor-primary-0 font-family cvn-navbar">
-      <div class="cvn-navbar-items">
-       
-      </div>
+    <nav id="cvnNavbar" class="cvn-navbar">
+      <div id="cvnNavbarItems" class="cvn-navbar-items"></div>
       <div class="cvn-navbar-collapse-menu-outer">
           <div id="cvnNavbarCollapseMenu" class="cvn-navbar-collapse-menu">
             <div></div>
@@ -109,24 +95,53 @@
       static get properties() {
         return {
           data: {
-            type: String,
+            type: Array,
             value: function() {
-              return {};
+              return [];
             },
-            observer: "_generateMenu"
+            observer: "_dataObserver"
           }
         };
+      }
+
+      constructor() {
+        super();
       }
 
       ready() {
           super.ready();
       }
 
-      _generateMenu(newValue, oldValue) {
+      _dataObserver(newValue, oldValue) {
         if(newValue) {
-          console.dir(JSON.parse(newValue));
+          this._generateMenu(newValue);
         }
-        
+      }
+
+      _generateMenu(data) {
+        if (data && data.length) {
+          for (let i = 0; i < data.length; i++) {
+            let menuItem = this._generateMenuItems(data[i]);
+            
+            this.$.cvnNavbarItems.appendChild(menuItem);
+          }
+          
+        }
+      }
+
+      _generateMenuItems(item) {
+        let menuItem = null;
+
+        if (item.type === "single") {
+          menuItem = document.createElement("cvn-navbar-menu-item");
+        } else if (item.type === "dropdown") {
+          menuItem = document.createElement("cvn-navbar-dropdown-item");
+          menuItem.setAttribute("data", JSON.stringify(item.sub));
+        }
+
+        menuItem.innerText = item.name;
+        menuItem.setAttribute("link", item.link);
+        return menuItem;
       }
     }
 

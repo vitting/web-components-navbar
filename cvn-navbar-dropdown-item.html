@@ -4,11 +4,13 @@
     <template>
         <style include="cvn-navbar-styles">
             :host {
-                display: block;
+                display: inline-block;
+                height: 100%;
+                align-self: center;
             }
 
             i {
-                border: solid white;
+                border: solid var(--navbar-dropdown-icon-color);
                 border-width: 0 2px 2px 0;
                 display: inline-block;
                 padding: 3px;
@@ -26,26 +28,62 @@
 
             .cvn-navbar-item {
                 box-sizing: border-box;
-                display: block;
+                display: flex;
                 padding: 10px;
+                height: 100%;
+                width: var(--navbar-menu-item-width);
+                align-items: center;
             }
 
             .cvn-navbar-item a {
                 text-decoration: none;
-                color: #fff;
+                color: var(--navbar-menu-item-color);
             }
 
             .cvn-navbar-item a:hover {
-                color: #635394;
+                color: var(--navbar-menu-item-hover-color);
             }
 
             .cvn-navbar-item a.active {
-                color: #8D81B3;
+                color: var(--navbar-menu-item-active-color);
+            }
+
+            .cvn-navbar-item .cvn-navbar-dropdown-items {
+                position: absolute;
+                top: var(--navbar-height);
+                padding: 20px;  
+                display: none;
+            }
+
+            .cvn-navbar-item .cvn-navbar-dropdown-items .cvn-navbar-sub-item {
+                margin-bottom: 20px;
+            }
+
+            .cvn-navbar-item .cvn-navbar-dropdown-items .cvn-navbar-sub-item:last-child {
+                margin-bottom: 0;
+            }
+
+            .cvn-navbar-item:hover > .cvn-navbar-dropdown-items {
+                display: block;
+            }
+
+            .cvn-navbar-item .cvn-navbar-dropdown-items {
+                background-color: var(--navbar-dropdown-bgcolor);
+                
+            }
+
+            .cvn-navbar-item .cvn-navbar-dropdown-items a {
+                color: var(--navbar-dropdown-color);
+            }
+
+            .cvn-navbar-item .cvn-navbar-dropdown-items a:hover {
+                color: var(--navbar-dropdown-hover-color);
             }
         </style>
 
         <div class="cvn-navbar-item">
-            <a href="#"><slot></slot><i class="arrow down"></i></a>
+            <a href$="[[link]]"><slot></slot><i class="arrow down"></i></a>
+            <div id="cvnNavbarDropdownItems" class="cvn-navbar-dropdown-items"></div>
         </div>
     </template>
 
@@ -54,15 +92,43 @@
             static get is() { return "cvn-navbar-dropdown-item"; }
             static get properties() {
                 return {
-                    prop1: {
+                    link: {
                         type: String,
-                        value: 'web-components-navbar'
+                        value: ""
+                    },
+                    data: {
+                        type: Array,
+                        value: function() {
+                            return [];
+                        },
+                        observer: "_dataObserver"
                     }
                 };
             }
 
             ready() {
                 super.ready();
+            }
+
+            _dataObserver(newValue, oldValue) {
+                if (newValue) {
+                    this._generateDropdownMenuItems(newValue);
+                }
+            }
+
+            _generateDropdownMenuItems(data) {
+                if (data && data.length) {
+                    for (let i = 0; i < data.length; i++) {
+                        let dataItem = data[i];
+                        let divElem = document.createElement("div");
+                        let aElem = document.createElement("a");
+                        aElem.href = dataItem.link;
+                        aElem.innerText = dataItem.name;
+                        divElem.classList.add("cvn-navbar-sub-item");
+                        divElem.appendChild(aElem);
+                        this.$.cvnNavbarDropdownItems.appendChild(divElem);
+                    }
+                }
             }
         }
 

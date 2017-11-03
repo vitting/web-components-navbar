@@ -1,29 +1,33 @@
+<link rel="import" href="../polymer/polymer.html">
+
 <dom-module id="cvn-navbar-styles">
   <template>
     <style>
-        .font-family { font-family: "Roboto", "Arial", "Helvetica Sans" }
-        .color-primary-0 { color: #403075 }
-        .color-primary-1 { color: #8D81B3 }
-        .color-primary-2 { color: #635394 }
-        .color-primary-3 { color: #251656 }
-        .color-primary-4 { color: #120638 }
-        .hover-color-primary-0:hover { color: #403075 }
-        .hover-color-primary-1:hover { color: #8D81B3 }
-        .hover-color-primary-2:hover { color: #635394 }
-        .hover-color-primary-3:hover { color: #251656 }
-        .hover-color-primary-4 { color: #120638 }
-        .bgcolor-primary-0 { background-color: #403075 }
-        .bgcolor-primary-1 { background-color: #8D81B3 }
-        .bgcolor-primary-2 { background-color: #635394 }
-        .bgcolor-primary-3 { background-color: #251656 }
-        .bgcolor-primary-4 { background-color: #120638 }
-        .hover-bgcolor-primary-0:hover { background-color: #403075 }
-        .hover-bgcolor-primary-1:hover { background-color: #8D81B3 }
-        .hover-bgcolor-primary-2:hover { background-color: #635394 }
-        .hover-bgcolor-primary-3:hover { background-color: #251656 }
-        .hover-bgcolor-primary-4:hover { background-color: #120638 }
-        .bgcolor-white { color: #fff }
-        .color-white { color: #fff }
+        :host {
+          --default-font-family: "Roboto", "Arial", "Helvetica Sans";
+          --default-bgcolor: #403075; 
+          --default-color: #fff;
+          --default-hover-color: #635394;
+
+          --navbar-font-family: var(--default-font-family);
+          --navbar-position: relative;
+          --navbar-justify-content: flex-start;
+          --navbar-bgcolor: var(--default-bgcolor);
+          --navbar-height: 60px;
+          
+          --navbar-collapse-menu-color: var(--default-color);
+          --navbar-collapse-menu-hover-color: var(--default-hover-color);
+          
+          --navbar-menu-item-color: var(--default-color);
+          --navbar-menu-item-hover-color: var(--default-hover-color);
+          --navbar-menu-item-active-color: #8D81B3;
+          --navbar-menu-item-width: auto;
+          
+          --navbar-dropdown-icon-color: var(--navbar-menu-item-color);
+          --navbar-dropdown-bgcolor: var(--default-bgcolor); 
+          --navbar-dropdown-color: var(--default-color);
+          --navbar-dropdown-hover-color: var(--default-hover-color);
+        }
     </style>
   </template>
 </dom-module>
