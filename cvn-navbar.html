@@ -3,9 +3,13 @@
 <link rel="import" href="cvn-navbar-dropdown-item.html">
 <link rel="import" href="cvn-navbar-styles.html">
 
+<!-- Name og web component <cvn-navbar data="some json data"></cvn-navbar> -->
 <dom-module id="cvn-navbar">
   <template>
-    <style include="cvn-navbar-styles">
+    <!-- Styles for cvn-navbar and includes shared styles from cvn-navbar-styles.html -->
+    <!-- Styles are encapsulated and won't affect parent elements -->
+    <style include="cvn-navbar-styles"> 
+      /* :host styles web component element <cvn-navbar></cvn-navbar> */
       :host {
         display: block;
         font-family: var(--navbar-font-family);
@@ -49,7 +53,7 @@
       }
 
       #cvnNavbar .cvn-navbar-collapse-menu:hover > div {
-        background-color: #635394;
+        background-color: var(--navbar-collapse-menu-hover-color);
       }
 
       #cvnNavbar .cvn-navbar-collapse-menu > div:last-child {
@@ -58,7 +62,6 @@
       
       @media only screen and (max-width: 768px) {
         #cvnNavbar .cvn-navbar-items {
-          /* display: none; */
           display: none;
           flex-direction: column;
           background-color: var(--navbar-menu-items-bgcolor);
@@ -89,6 +92,8 @@
       }
 
     </style>
+
+    <!-- Web component HTML -->
     <nav id="cvnNavbar" class="cvn-navbar">
       <div id="cvnNavbarItems" class="cvn-navbar-items"></div>
       <div class="cvn-navbar-collapse-menu-outer">
@@ -98,43 +103,54 @@
             <div></div>
           </div>
       </div>
-
     </nav>
   </template>
 
+  <!-- Web component Script -->
   <script>
-    class CvnNavbar extends Polymer.Element {
-      static get is() { return "cvn-navbar"; }
+    class CvnNavbar extends Polymer.Element { // Polymer.Element that the class extends is Polymer helper functions
+      // Polymer setup. Web Component name
+      static get is() { return "cvn-navbar"; } 
+       // Polymer setup. Custom properties on Element = <element my-custom-property="value"></element>
+       // Documentation: https://www.polymer-project.org/2.0/docs/devguide/properties
       static get properties() {
         return {
-          data: {
-            type: Array,
-            value: function() {
+          data: { // Array of JSON data used to generate menu items <cvn-navbar data="???">
+            type: Array, // property type. Data will be converted to
+            value: function() { // Default value if no property is provided on <cvn-navbar>
               return [];
             },
-            observer: "_dataObserver"
+            observer: "_dataObserver" // Simple observer. Call method if property value is changed. Function signature functionname(newValue, oldValue) {}
           }
         };
       }
 
+      // Class constructor - not used in this example
       constructor() {
         super();
       }
 
+      // Event fired when this element ready in DOM
       ready() {
-          super.ready();
+          super.ready();  // Important!! Has to be at top in ready()
 
+          // Event listener for click on CollapseMenu element
+          // The syntax this$.xxxxxx = direct reference to shadow dom element Id's equals this.shadowRoot.querySelector("#xxxxxx");
           this.$.cvnNavbarCollapseMenu.addEventListener("click", () => {
+            // Show or hide menu
             this.$.cvnNavbarItems.classList.toggle("cvn-navbar-items-display");
           });
       }
 
+      // Private Method called when Data property value changes
+      // The syntax _methodname() indicates that the method is private
       _dataObserver(newValue, oldValue) {
         if(newValue) {
           this._generateMenu(newValue);
         }
       }
 
+      // Private Method generating the menu
       _generateMenu(data) {
         if (data && data.length) {
           for (let i = 0; i < data.length; i++) {
@@ -146,6 +162,7 @@
         }
       }
 
+      // Private Method generating the menu items
       _generateMenuItems(item) {
         let menuItem = null;
 
@@ -153,11 +170,14 @@
           menuItem = document.createElement("cvn-navbar-menu-item");
         } else if (item.type === "dropdown") {
           menuItem = document.createElement("cvn-navbar-dropdown-item");
+          //We have to stringify a object when assigning it to a property
           menuItem.setAttribute("data", JSON.stringify(item.sub));
         }
 
         menuItem.innerText = item.name;
         menuItem.setAttribute("link", item.link);
+
+        // Lister for when menu items is clicked and dispatches new event with menu item data
         menuItem.addEventListener("menu-item-click", (e) => {
           this.dispatchEvent(new CustomEvent("navbar-menu-item-click", {detail: e.detail}));
         });
@@ -165,6 +185,7 @@
       }
     }
 
+    // Standard Web component initializing. Registration of component as Web-component
     window.customElements.define(CvnNavbar.is, CvnNavbar);
   </script>
 </dom-module>

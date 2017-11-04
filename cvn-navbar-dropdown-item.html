@@ -1,8 +1,12 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="cvn-navbar-styles.html">
+
+<!-- Name og web component <cvn-navbar-dropdown-item link="Link value">Menu Item Name</cvn-navbar-dropdown-item> -->
 <dom-module id="cvn-navbar-dropdown-item">
     <template>
+        <!-- Styles for cvn-navbar-dropdown-item and includes shared styles from cvn-navbar-styles.html -->
         <style include="cvn-navbar-styles">
+            /* :host styles web component element <cvn-navbar-dropdown-item></cvn-navbar-dropdown-item> */
             :host {
                 display: block;
                 height: 100%;
@@ -33,6 +37,8 @@
                 height: 100%;
                 width: var(--navbar-menu-item-width);
                 align-items: center;
+                position: relative;
+                top: 0;
             }
 
             .cvn-navbar-item a {
@@ -40,8 +46,12 @@
                 color: var(--navbar-menu-item-color);
             }
 
-            .cvn-navbar-item a:hover {
+            .cvn-navbar-item:hover a {
                 color: var(--navbar-menu-item-hover-color);
+            }
+
+            .cvn-navbar-item:hover i {
+                border-color: var(--navbar-menu-item-hover-color);
             }
 
             .cvn-navbar-item a.active {
@@ -53,6 +63,7 @@
                 top: var(--navbar-height);
                 padding: 20px;  
                 display: none;
+                width: 100%;
             }
 
             .cvn-navbar-item .cvn-navbar-dropdown-items .cvn-navbar-sub-item {
@@ -83,24 +94,50 @@
                 :host {
                     align-self: flex-start;
                 }
+
+                .down {
+                    transform: rotate(-225deg);
+                    -webkit-transform: rotate(-225deg);
+                }   
+
+                .cvn-navbar-item .cvn-navbar-item-link i {
+                    float: left;
+                    margin-top: 5px;
+                    margin-left: -8px;
+                }
+
+                .cvn-navbar-item .cvn-navbar-dropdown-items {
+                    position: absolute;
+                    top: 0; 
+                    left: -140%;
+                    padding: 20px;  
+                    display: none;
+                }
             }
         </style>
 
+        <!-- Web component HTML -->
         <div id="cvnNavbarItem" class="cvn-navbar-item">
-            <a class="cvn-navbar-item-link" href$="[[link]]"><slot></slot><i class="arrow down"></i></a>
+            <div class="cvn-navbar-item-link-outer"><a class="cvn-navbar-item-link" href$="[[link]]"><slot></slot><i class="arrow down"></i></a></div>
             <div id="cvnNavbarDropdownItems" class="cvn-navbar-dropdown-items"></div>
         </div>
     </template>
 
+    <!-- Web component Script -->
     <script>
-        class CvnNavbarDropdownItem extends Polymer.Element {
+        class CvnNavbarDropdownItem extends Polymer.Element { // Polymer.Element that the class extends is Polymer helper functions
+            // Polymer setup. Web Component name
             static get is() { return "cvn-navbar-dropdown-item"; }
+            // Polymer setup. Custom properties on Element = <element my-custom-property="value"></element>
+            // Documentation: https://www.polymer-project.org/2.0/docs/devguide/properties
             static get properties() {
                 return {
+                    // Link value for element
                     link: {
                         type: String,
                         value: ""
                     },
+                    // Data for dropdown menu items
                     data: {
                         type: Array,
                         value: function() {
@@ -148,6 +185,7 @@
             }
         }
 
+        // Standard Web component initializing. Registration of component as Web-component
         window.customElements.define(CvnNavbarDropdownItem.is, CvnNavbarDropdownItem);
     </script>
 </dom-module>

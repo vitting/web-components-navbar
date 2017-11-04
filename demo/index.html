@@ -25,7 +25,10 @@
 </head>
 
 <body>
+  <!-- The Web component -->
   <cvn-navbar id="navbar" class=""></cvn-navbar>
+
+  <!-- Some filler data -->
   <div class="container">
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quasi, quaerat laboriosam, natus dolorem quae eveniet quo a qui sit eum ea assumenda perspiciatis ullam necessitatibus eaque consectetur fugit reprehenderit!
@@ -99,7 +102,7 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    // Get som menu data
+    // Get some menu data. See data.json
     fetch("data.json").then((response) => {
       // return ajax stream as JSON
       return response.json(); 
@@ -113,6 +116,7 @@
       console.error(err);
     });
 
+    // Listen for menu items clicked
     let navbar = document.querySelector("#navbar");
     navbar.addEventListener("navbar-menu-item-click", (e) => {
       let link = e.detail.link;

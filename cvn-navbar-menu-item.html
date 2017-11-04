@@ -1,9 +1,12 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="cvn-navbar-styles.html">
 
+<!-- Name og web component <cvn-navbar-menu-item link="Link value">Menu Item Name</cvn-navbar-menu-item> -->
 <dom-module id="cvn-navbar-menu-item">
     <template>
+        <!-- Styles for cvn-navbar-menu-item and includes shared styles from cvn-navbar-styles.html -->
         <style include="cvn-navbar-styles">
+            /* :host styles web component element <cvn-navbar-menu-item></cvn-navbar-menu-item> */
             :host {
                 display: inline-block;
                 height: 100%;
@@ -39,31 +42,39 @@
             }
         </style>
 
+        <!-- Web component HTML -->
         <div id="cvnNavbarItem" class="cvn-navbar-item">
             <a class="cvn-navbar-item-link" href$="[[link]]"><slot></slot></a>
         </div>
     </template>
 
+    <!-- Web component Script -->
     <script>
-        class CvnNavbarMenuItem extends Polymer.Element {
-            static get is() { return "cvn-navbar-menu-item"; }
+        class CvnNavbarMenuItem extends Polymer.Element { // Polymer.Element that the class extends is Polymer helper functions
+            // Polymer setup. Web Component name
+            static get is() { return "cvn-navbar-menu-item"; } 
+            // Polymer setup. Custom properties on Element = <element my-custom-property="value"></element>
+            // Documentation: https://www.polymer-project.org/2.0/docs/devguide/properties
             static get properties() {
                 return {
-                    link: {
-                        type: String,
-                        value: ""
+                    link: { // Property name
+                        type: String, // Convert property to String
+                        value: "" // Property default value
                     }
                 };
             }
 
+            // Event fired when this element ready in DOM
             ready() {
-                super.ready();
+                super.ready(); // Important!! Has to be at top in ready()
 
                 this._initEvents();
             }
 
             _initEvents() {
                 let aElem = this.$.cvnNavbarItem.querySelector(".cvn-navbar-item-link");
+                // Setting up a event listner when menu item is clicked. 
+                // Dispatches a event with menu item data to main cvn-navbar element
                 aElem.addEventListener("click", (e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -72,6 +83,7 @@
             }
         }
 
+        // Standard Web component initializing. Registration of component as Web-component
         window.customElements.define(CvnNavbarMenuItem.is, CvnNavbarMenuItem);
     </script>
 </dom-module>
